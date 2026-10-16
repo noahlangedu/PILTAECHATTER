@@ -3,55 +3,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090914">
   <title>PILTAE CHATTER</title>
 
   <style>
     :root {
       --bg: #090914;
-      --panel: #121225;
-      --panel2: #191932;
-      --purple: #9b5cff;
+      --panel: #141426;
+      --panel2: #1c1c34;
+      --purple: #a16aff;
       --cyan: #54e6ff;
-      --text: #f3f0ff;
-      --muted: #a5a2c3;
-      --border: #302b4c;
-      --danger: #ff6b85;
-      --success: #67f5ad;
+      --text: #f4f0ff;
+      --muted: #a8a3c5;
+      --border: #34304e;
+      --red: #ff8298;
+      --green: #70f5b1;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       background:
-        radial-gradient(ellipse at top, #211342 0%, transparent 48%),
+        radial-gradient(ellipse at top, #261343 0%, transparent 52%),
         var(--bg);
       color: var(--text);
       font-family: Inter, system-ui, Arial, sans-serif;
     }
 
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .container {
-      width: min(1050px, 92%);
-      margin: auto;
-    }
+    button, input { font: inherit; }
 
     header {
       padding: 22px 0;
       border-bottom: 1px solid var(--border);
-      background: #090914cc;
+      background: #090914d9;
+    }
+
+    .container {
+      width: min(1000px, 92%);
+      margin: auto;
     }
 
     .brand {
@@ -60,100 +52,81 @@
       letter-spacing: 2px;
     }
 
-    .brand span {
-      color: var(--purple);
-    }
+    .brand span, .accent { color: var(--purple); }
 
     .tagline {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       margin-top: 5px;
+      letter-spacing: 1px;
     }
 
-    main {
-      padding: 44px 0;
-    }
+    main { padding: 38px 0; }
 
     .hero {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 30px;
     }
 
     .hero h1 {
-      font-size: clamp(34px, 6vw, 62px);
-      margin: 0 0 12px;
+      font-size: clamp(35px, 7vw, 60px);
       letter-spacing: -2px;
+      margin: 0 0 10px;
     }
 
-    .hero h1 span {
-      color: var(--purple);
-    }
-
-    .hero p {
+    .hero p, .muted {
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .card {
-      background: linear-gradient(145deg, #17172c, #10101f);
+      background: linear-gradient(145deg, #19192e, #10101e);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 18px 60px #0005;
-      margin-bottom: 20px;
+      border-radius: 17px;
+      padding: 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 15px 45px #0003;
     }
 
     .auth-card {
-      width: min(440px, 100%);
-      margin: 0 auto 25px;
+      width: min(450px, 100%);
+      margin: auto;
     }
 
-    h2 {
-      margin-top: 0;
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    h2 { margin-top: 0; }
 
     label {
       display: block;
+      margin: 16px 0 7px;
       font-size: 13px;
       color: var(--muted);
-      margin: 17px 0 7px;
     }
 
     input {
       width: 100%;
-      background: #0b0b18;
+      padding: 13px;
       color: var(--text);
+      background: #0a0a17;
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 13px 14px;
       outline: none;
     }
 
     input:focus {
       border-color: var(--purple);
-      box-shadow: 0 0 0 3px #9b5cff22;
+      box-shadow: 0 0 0 3px #a16aff22;
     }
 
     .btn {
       width: 100%;
-      padding: 13px 15px;
+      padding: 13px;
+      margin-top: 16px;
       border: 0;
       border-radius: 10px;
-      font-weight: 800;
-      color: white;
       background: linear-gradient(100deg, #7c3aed, #a855f7);
-      margin-top: 17px;
-    }
-
-    .btn:disabled {
-      opacity: .6;
-      cursor: wait;
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
     }
 
     .btn.secondary {
@@ -161,111 +134,100 @@
       border: 1px solid var(--border);
     }
 
+    .btn:disabled { opacity: .6; cursor: wait; }
+
     .switch {
       text-align: center;
-      margin-top: 20px;
-      font-size: 14px;
+      margin-top: 18px;
       color: var(--muted);
+      font-size: 14px;
     }
 
     .link {
       background: none;
       border: 0;
       color: var(--cyan);
+      padding: 5px;
+      cursor: pointer;
       font-weight: 700;
-      padding: 4px;
     }
 
     .message {
       display: none;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
       margin-top: 16px;
+      padding: 12px;
+      border-radius: 9px;
+      line-height: 1.6;
+      font-size: 13px;
+      overflow-wrap: anywhere;
     }
 
-    .message.show {
-      display: block;
-    }
+    .message.show { display: block; }
 
     .message.error {
-      background: #ff55751a;
-      border: 1px solid #ff557555;
-      color: #ffb2bf;
+      color: #ffb6c3;
+      border: 1px solid #ff829855;
+      background: #ff829811;
     }
 
     .message.success {
-      background: #48f0a315;
-      border: 1px solid #48f0a355;
-      color: var(--success);
+      color: var(--green);
+      border: 1px solid #70f5b155;
+      background: #70f5b111;
     }
 
     .message.info {
-      background: #54e6ff12;
-      border: 1px solid #54e6ff44;
       color: #b9f5ff;
+      border: 1px solid #54e6ff55;
+      background: #54e6ff11;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    .hidden { display: none !important; }
 
     .dashboard-top {
       display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
       justify-content: space-between;
       align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
-    .status {
-      color: var(--success);
-      font-size: 13px;
+    .badge {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .nav {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
       gap: 10px;
       margin: 20px 0;
     }
 
     .nav button {
-      color: var(--text);
-      background: var(--panel2);
+      padding: 13px 9px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 13px 10px;
+      color: var(--text);
+      background: var(--panel2);
+      cursor: pointer;
     }
 
-    .nav button:hover {
-      border-color: var(--purple);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-    }
+    .nav button:hover { border-color: var(--purple); }
 
     .feature {
-      background: #0c0c1b;
+      background: #0d0d1b;
       border: 1px solid var(--border);
-      border-radius: 12px;
       padding: 18px;
-    }
-
-    .feature h3 {
-      margin: 0 0 8px;
+      border-radius: 12px;
     }
 
     footer {
       text-align: center;
       color: var(--muted);
       font-size: 12px;
-      padding: 28px 0 40px;
+      padding: 25px 0 35px;
     }
   </style>
 </head>
@@ -280,14 +242,14 @@
 
   <main class="container">
     <section class="hero">
-      <h1>WELCOME TO <span>PILTAE</span></h1>
-      <p>Your community starts here. Sign in or create an account to continue.</p>
+      <h1>WELCOME TO <span class="accent">PILTAE</span></h1>
+      <p>A place for your community to connect.</p>
     </section>
 
     <section id="authPanel" class="card auth-card">
       <h2 id="authTitle">Sign in</h2>
       <p id="authDescription" class="muted">
-        Welcome back. Enter your account details below.
+        Welcome back. Sign in to continue.
       </p>
 
       <form id="authForm">
@@ -298,7 +260,7 @@
             type="text"
             maxlength="32"
             autocomplete="nickname"
-            placeholder="What should people call you?"
+            placeholder="Your public name"
           >
         </div>
 
@@ -318,7 +280,7 @@
           minlength="6"
           autocomplete="current-password"
           required
-          placeholder="Enter your password"
+          placeholder="Your password"
         >
 
         <button id="submitButton" class="btn" type="submit">
@@ -326,14 +288,14 @@
         </button>
       </form>
 
-      <button id="forgotButton" class="btn secondary" type="button">
+      <button id="resetButton" class="btn secondary" type="button">
         Reset password
       </button>
 
       <div id="authMessage" class="message" role="status" aria-live="polite"></div>
 
       <div class="switch">
-        <span id="switchText">New to PILTAE CHATTER?</span>
+        <span id="switchText">New here?</span>
         <button id="switchButton" class="link" type="button">
           Create account
         </button>
@@ -345,10 +307,9 @@
         <div class="dashboard-top">
           <div>
             <h2>Welcome, <span id="welcomeName">Member</span></h2>
-            <div id="userEmail" class="muted"></div>
             <div id="profileStatus" class="muted"></div>
           </div>
-          <span class="status">● SIGNED IN</span>
+          <span class="badge">● SIGNED IN</span>
         </div>
 
         <button id="signOutButton" class="btn secondary" type="button">
@@ -356,7 +317,7 @@
         </button>
       </div>
 
-      <div class="nav" aria-label="Main navigation">
+      <nav class="nav" aria-label="Main navigation">
         <button data-section="community">Community</button>
         <button data-section="messages">Messages</button>
         <button data-section="friends">Friends</button>
@@ -367,55 +328,58 @@
         <button data-section="mines">Mines</button>
         <button data-section="shop">Shop</button>
         <button data-section="profile">Profile</button>
-      </div>
+      </nav>
 
-      <div class="card">
+      <section class="card">
         <h2 id="sectionTitle">Community</h2>
-        <p id="sectionDescription" class="muted">
-          Welcome to PILTAE CHATTER.
-        </p>
-        <div id="sectionContent" class="feature-grid"></div>
-      </div>
+        <p id="sectionDescription" class="muted"></p>
+        <div id="sectionContent"></div>
+      </section>
     </section>
   </main>
 
-  <footer>
-    PILTAE CHATTER · Built for the community
-  </footer>
+  <footer>PILTAE CHATTER · Built for the community</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
     "use strict";
 
-    // Your existing Supabase project settings.
     const SUPABASE_URL =
       "https://erdmambofrurnieznurd.supabase.co";
 
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_pJMItt5PjLrsuFxStW2YNQ_OrJNJqpv";
 
-    // Your GitHub Pages site. Used for signup confirmation and password reset.
     const SITE_URL =
       "https://noahlangedu.github.io/piltaechatter/";
 
     let supabase = null;
     let currentUser = null;
-    let isLoginMode = true;
-    let profileLoadToken = 0;
+    let loginMode = true;
+    let authListenerRegistered = false;
 
     const $ = (id) => document.getElementById(id);
 
-    function showMessage(id, message, type = "info") {
-      const element = $(id);
-      element.textContent = message;
-      element.className = "message show " + type;
+    function message(id, text, type = "info") {
+      const el = $(id);
+      el.textContent = text;
+      el.className = "message show " + type;
     }
 
     function clearMessage(id) {
-      const element = $(id);
-      element.textContent = "";
-      element.className = "message";
+      $(id).textContent = "";
+      $(id).className = "message";
+    }
+
+    function cleanName(value) {
+      return String(value || "").trim().replace(/\s+/g, " ").slice(0, 32);
+    }
+
+    function fallbackName(user) {
+      return cleanName(user?.user_metadata?.display_name) ||
+        cleanName(user?.user_metadata?.username) ||
+        "Member";
     }
 
     function showAuth() {
@@ -428,308 +392,247 @@
       $("dashboard").classList.remove("hidden");
     }
 
-    function setAuthMode(loginMode) {
-      isLoginMode = loginMode;
+    function setMode(isLogin) {
+      loginMode = isLogin;
 
-      $("authTitle").textContent = loginMode
+      $("authTitle").textContent = isLogin ? "Sign in" : "Create account";
+      $("authDescription").textContent = isLogin
+        ? "Welcome back. Sign in to continue."
+        : "Choose the display name people will see.";
+
+      $("submitButton").textContent = isLogin
         ? "Sign in"
         : "Create account";
 
-      $("authDescription").textContent = loginMode
-        ? "Welcome back. Enter your account details below."
-        : "Create your PILTAE CHATTER account.";
-
-      $("submitButton").textContent = loginMode
-        ? "Sign in"
-        : "Create account";
-
-      $("switchText").textContent = loginMode
-        ? "New to PILTAE CHATTER?"
+      $("switchText").textContent = isLogin
+        ? "New here?"
         : "Already have an account?";
 
-      $("switchButton").textContent = loginMode
+      $("switchButton").textContent = isLogin
         ? "Create account"
         : "Sign in";
 
-      $("nameField").classList.toggle("hidden", loginMode);
-      $("password").autocomplete = loginMode
+      $("nameField").classList.toggle("hidden", isLogin);
+      $("displayName").required = !isLogin;
+      $("password").autocomplete = isLogin
         ? "current-password"
         : "new-password";
 
       clearMessage("authMessage");
     }
 
-    function friendlyAuthError(error) {
-      const message = String(error?.message || "").toLowerCase();
-      const code = String(error?.code || "").toLowerCase();
+    function authError(error) {
+      const raw = String(error?.message || "");
+      const lower = raw.toLowerCase();
 
-      if (
-        message.includes("invalid login credentials") ||
-        message.includes("invalid credentials")
-      ) {
-        return "Your email or password is incorrect. Check both and try again.";
-      }
-
-      if (
-        message.includes("email not confirmed") ||
-        message.includes("email_not_confirmed")
-      ) {
-        return "Your email is not confirmed yet. Open your latest confirmation email and click its link.";
-      }
-
-      if (
-        message.includes("rate limit") ||
-        message.includes("too many requests") ||
-        code.includes("over_email_send_rate_limit")
-      ) {
-        return "Supabase has temporarily limited email requests. Wait before requesting another confirmation email, or configure custom SMTP in Supabase.";
-      }
-
-      if (
-        message.includes("user already registered") ||
-        message.includes("already been registered")
-      ) {
-        return "An account with this email already exists. Switch to Sign in instead.";
-      }
-
-      if (
-        message.includes("password") &&
-        (
-          message.includes("length") ||
-          message.includes("characters") ||
-          message.includes("weak")
-        )
-      ) {
-        return "Choose a stronger password that meets the password requirements.";
-      }
-
-      if (
-        message.includes("network") ||
-        message.includes("fetch")
-      ) {
-        return "Couldn't reach Supabase. Check your internet connection and try again.";
-      }
-
-      // Avoid showing raw server details, SQL, or internal configuration.
-      console.error("Authentication error:", {
-        message: error?.message,
+      console.error("PILTAE CHATTER authentication error:", {
+        message: raw,
         code: error?.code,
         status: error?.status
       });
 
-      return "Sign-in failed. Check your email, password, confirmation status, and the browser console for the technical error.";
+      if (
+        lower.includes("invalid login credentials") ||
+        lower.includes("invalid credentials")
+      ) {
+        return "Incorrect email or password. Check your details and try again.";
+      }
+
+      if (lower.includes("email not confirmed")) {
+        return "Your email is not confirmed. Open your latest confirmation email and follow its link.";
+      }
+
+      if (
+        lower.includes("rate limit") ||
+        lower.includes("too many requests")
+      ) {
+        return "Supabase has temporarily limited email requests. Wait before trying again, or configure custom SMTP in Supabase.";
+      }
+
+      if (
+        lower.includes("already registered") ||
+        lower.includes("already been registered")
+      ) {
+        return "This email already has an account. Switch to Sign in.";
+      }
+
+      if (
+        lower.includes("row-level security") ||
+        lower.includes("permission denied") ||
+        lower.includes("violates row-level security")
+      ) {
+        return "Your account signed in, but the profile database denied access. Check the profiles table policies and rerun the provided profile SQL.";
+      }
+
+      if (lower.includes("network") || lower.includes("fetch")) {
+        return "Could not connect to Supabase. Check your connection and reload.";
+      }
+
+      return raw
+        ? "Request failed: " + raw
+        : "Something went wrong. Open your browser console for details.";
     }
 
-    function safeUsername(value) {
-      const cleaned = String(value || "")
-        .trim()
-        .replace(/\s+/g, " ")
-        .slice(0, 32);
+    async function saveProfile(user, requestedName = "") {
+      const nameFromForm = cleanName(requestedName);
+      const metadataName = fallbackName(user);
+      const chosenName = nameFromForm || metadataName;
 
-      return cleaned;
-    }
-
-    function emailBasedName(email) {
-      const part = String(email || "").split("@")[0];
-      return safeUsername(part) || "Member";
-    }
-
-    async function loadOrCreateProfile(user, preferredName = "") {
-      if (!user) return null;
-
-      const token = ++profileLoadToken;
-
+      // Read the user's existing profile first so existing names are preserved.
       const { data: existing, error: readError } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, username, display_name")
         .eq("id", user.id)
         .maybeSingle();
 
       if (readError) {
-        console.error("Profile lookup failed:", readError);
+        console.error("Profile read error:", readError);
         $("profileStatus").textContent =
-          "Your account is signed in, but your profile couldn't be loaded. Check profiles table permissions and columns.";
-        return null;
+          "Signed in, but the profile could not be loaded. Check the profiles table and its policies.";
+        $("welcomeName").textContent = chosenName;
+        return;
       }
 
-      // If a profile already exists, preserve its current data.
-      if (existing) {
-        const displayName =
-          safeUsername(existing.display_name) ||
-          safeUsername(existing.username) ||
-          safeUsername(preferredName) ||
-          emailBasedName(user.email);
+      const savedName =
+        nameFromForm ||
+        cleanName(existing?.display_name) ||
+        cleanName(existing?.username) ||
+        metadataName;
 
-        $("welcomeName").textContent = displayName;
-        $("profileStatus").textContent =
-          existing.display_name || existing.username
-            ? "Profile loaded."
-            : "Your profile has no saved display name yet.";
-
-        return existing;
-      }
-
-      // No profile row was found. Attempt to create a minimal profile.
-      // The username column is assumed to exist in the current schema.
-      const displayName =
-        safeUsername(preferredName) ||
-        emailBasedName(user.email);
-
-      const newProfile = {
-        id: user.id,
-        username: displayName,
-        display_name: displayName
-      };
-
-      const { data: created, error: insertError } = await supabase
+      // Upsert creates a missing row or updates the name in an existing row.
+      const { data, error } = await supabase
         .from("profiles")
-        .insert(newProfile)
-        .select("*")
+        .upsert(
+          {
+            id: user.id,
+            username: savedName,
+            display_name: savedName
+          },
+          { onConflict: "id" }
+        )
+        .select("id, username, display_name")
         .single();
 
-      if (token !== profileLoadToken) return null;
-
-      if (insertError) {
-        console.error("Profile creation failed:", insertError);
-
-        $("welcomeName").textContent = displayName;
+      if (error) {
+        console.error("Profile save error:", error);
+        $("welcomeName").textContent = savedName;
         $("profileStatus").textContent =
-          "Signed in, but saving your profile failed. Check your profiles table columns and Row Level Security policies.";
-
-        return null;
+          "Signed in, but saving the display name failed. Check the profiles schema, unique ID, and security policies.";
+        return;
       }
 
-      $("welcomeName").textContent = displayName;
-      $("profileStatus").textContent = "Profile created.";
-      return created;
+      $("welcomeName").textContent =
+        cleanName(data.display_name) ||
+        cleanName(data.username) ||
+        savedName;
+
+      $("profileStatus").textContent = "Your profile is ready.";
     }
 
     async function enterDashboard(user, preferredName = "") {
-      currentUser = user;
       if (!user) return;
 
+      currentUser = user;
       showDashboard();
-      $("userEmail").textContent = user.email || "";
-      $("welcomeName").textContent =
-        safeUsername(preferredName) || emailBasedName(user.email);
 
-      await loadOrCreateProfile(user, preferredName);
+      // Email is intentionally not shown in the dashboard.
+      $("welcomeName").textContent =
+        cleanName(preferredName) || fallbackName(user);
+
+      $("profileStatus").textContent = "Loading profile...";
+      await saveProfile(user, preferredName);
       showSection("community");
     }
 
-    const sectionData = {
-      community: {
-        title: "Community",
-        description: "Your community chat will appear here.",
-        cards: [
-          ["Community Chat", "Chat with members in real time."],
-          ["Online Members", "See who's part of the community."]
-        ]
-      },
-      messages: {
-        title: "Private Messages",
-        description: "Private messaging needs its messaging interface and database policies connected.",
-        cards: [["Direct Messages", "Your private conversations will appear here."]]
-      },
-      friends: {
-        title: "Friends",
-        description: "Friend requests and friend lists are not connected in this page yet.",
-        cards: [["Friend Requests", "Manage requests once the feature is connected."]]
-      },
-      groups: {
-        title: "Groups",
-        description: "Group creation, invitations, and membership controls need to be connected.",
-        cards: [["Group Chats", "Your group conversations will appear here."]]
-      },
-      wallet: {
-        title: "Wallet",
-        description: "Coin balances and payments need secure server-side logic before they can be used.",
-        cards: [["PILTAE Coins", "Your verified balance will appear here."]]
-      },
-      leaderboard: {
-        title: "Leaderboard",
-        description: "The leaderboard will display data once its query and permissions are connected.",
-        cards: [["Top Members", "Community rankings will appear here."]]
-      },
-      events: {
-        title: "Events",
-        description: "Event creation and attendance features are not connected yet.",
-        cards: [["Community Events", "Upcoming events will appear here."]]
-      },
-      mines: {
-        title: "Mines",
-        description: "The Mines game needs secure server-side game logic before real coins can be wagered.",
-        cards: [["Mines Game", "Game results and payouts must be validated on the server."]]
-      },
-      shop: {
-        title: "Shop",
-        description: "Shop items and purchases need server-side validation before coins are charged.",
-        cards: [["Community Shop", "Available items will appear here."]]
-      },
-      profile: {
-        title: "Profile",
-        description: "Your current profile information.",
-        cards: [["Account", "Your signed-in email is shown above."]]
-      }
+    const sections = {
+      community: [
+        "Community",
+        "The community chat interface still needs to be connected to your chat_messages table."
+      ],
+      messages: [
+        "Private Messages",
+        "Private messaging needs its own interface and database policies."
+      ],
+      friends: [
+        "Friends",
+        "Friend requests and friendships need to be connected."
+      ],
+      groups: [
+        "Groups",
+        "Group creation, invitations, and membership controls need to be connected."
+      ],
+      wallet: [
+        "Wallet",
+        "Coin balances and payments must be validated securely on the server."
+      ],
+      leaderboard: [
+        "Leaderboard",
+        "Leaderboard data needs to be connected to your database."
+      ],
+      events: [
+        "Events",
+        "Event creation and attendance features need to be connected."
+      ],
+      mines: [
+        "Mines",
+        "The game needs secure server-side game and payout logic."
+      ],
+      shop: [
+        "Shop",
+        "Shop inventory and purchases need server-side validation."
+      ],
+      profile: [
+        "Profile",
+        "Your display name is shown above. Profile editing can be added next."
+      ]
     };
 
     function showSection(key) {
-      const section = sectionData[key] || sectionData.community;
-      $("sectionTitle").textContent = section.title;
-      $("sectionDescription").textContent = section.description;
+      const selected = sections[key] || sections.community;
+      $("sectionTitle").textContent = selected[0];
+      $("sectionDescription").textContent = selected[1];
 
       const content = $("sectionContent");
       content.replaceChildren();
 
-      for (const item of section.cards) {
-        const card = document.createElement("div");
-        card.className = "feature";
+      const card = document.createElement("div");
+      card.className = "feature";
 
-        const heading = document.createElement("h3");
-        heading.textContent = item[0];
+      const title = document.createElement("strong");
+      title.textContent = selected[0];
 
-        const description = document.createElement("p");
-        description.className = "muted";
-        description.textContent = item[1];
+      const description = document.createElement("p");
+      description.className = "muted";
+      description.textContent = selected[1];
 
-        card.append(heading, description);
-        content.appendChild(card);
-      }
+      card.append(title, description);
+      content.appendChild(card);
     }
 
     $("authForm").addEventListener("submit", async (event) => {
       event.preventDefault();
 
       if (!supabase) {
-        showMessage(
-          "authMessage",
-          "Supabase hasn't initialized. Reload the page and try again.",
-          "error"
-        );
+        message("authMessage", "Supabase is not ready. Reload the page.", "error");
         return;
       }
 
       const email = $("email").value.trim();
       const password = $("password").value;
-      const preferredName = safeUsername($("displayName").value);
-
-      if (!email || !password) {
-        showMessage("authMessage", "Enter your email and password.", "error");
-        return;
-      }
-
-      if (!isLoginMode && !preferredName) {
-        showMessage("authMessage", "Enter a display name.", "error");
-        return;
-      }
-
+      const displayName = cleanName($("displayName").value);
       const submit = $("submitButton");
+
+      if (!loginMode && !displayName) {
+        message("authMessage", "Enter a display name first.", "error");
+        return;
+      }
+
       submit.disabled = true;
-      submit.textContent = isLoginMode ? "Signing in..." : "Creating account...";
+      submit.textContent = loginMode ? "Signing in..." : "Creating account...";
       clearMessage("authMessage");
 
       try {
-        if (isLoginMode) {
+        if (loginMode) {
           const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password
@@ -738,7 +641,7 @@
           if (error) throw error;
 
           await enterDashboard(data.user);
-          showMessage("authMessage", "Signed in successfully.", "success");
+          message("authMessage", "Signed in successfully.", "success");
         } else {
           const { data, error } = await supabase.auth.signUp({
             email,
@@ -746,8 +649,8 @@
             options: {
               emailRedirectTo: SITE_URL,
               data: {
-                display_name: preferredName,
-                username: preferredName
+                display_name: displayName,
+                username: displayName
               }
             }
           });
@@ -755,47 +658,40 @@
           if (error) throw error;
 
           if (data.session && data.user) {
-            await enterDashboard(data.user, preferredName);
-            showMessage("authMessage", "Account created successfully.", "success");
+            await enterDashboard(data.user, displayName);
+            message("authMessage", "Account created successfully.", "success");
           } else {
-            showMessage(
+            message(
               "authMessage",
-              "Your signup request was accepted. Check your email and confirm your account before signing in. If no email arrives, check Supabase email settings and rate limits.",
+              "Signup submitted. Check your email and confirm your account before signing in. If no email arrives, check Supabase's email settings and rate limits.",
               "success"
             );
           }
         }
       } catch (error) {
-        showMessage("authMessage", friendlyAuthError(error), "error");
+        message("authMessage", authError(error), "error");
       } finally {
         submit.disabled = false;
-        submit.textContent = isLoginMode ? "Sign in" : "Create account";
+        submit.textContent = loginMode ? "Sign in" : "Create account";
       }
     });
 
     $("switchButton").addEventListener("click", () => {
-      setAuthMode(!isLoginMode);
+      setMode(!loginMode);
     });
 
-    $("forgotButton").addEventListener("click", async () => {
-      if (!supabase) {
-        showMessage("authMessage", "Supabase hasn't initialized.", "error");
-        return;
-      }
+    $("resetButton").addEventListener("click", async () => {
+      if (!supabase) return;
 
       const email = $("email").value.trim();
 
       if (!email) {
-        showMessage(
-          "authMessage",
-          "Enter your email address first, then click Reset password.",
-          "error"
-        );
+        message("authMessage", "Enter your email address first.", "error");
         $("email").focus();
         return;
       }
 
-      $("forgotButton").disabled = true;
+      $("resetButton").disabled = true;
 
       try {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -804,15 +700,15 @@
 
         if (error) throw error;
 
-        showMessage(
+        message(
           "authMessage",
-          "If password reset is available for this account, an email will be sent. Check your inbox and spam folder.",
+          "If a reset email can be sent for this account, it will arrive shortly. Check your inbox and spam folder.",
           "success"
         );
       } catch (error) {
-        showMessage("authMessage", friendlyAuthError(error), "error");
+        message("authMessage", authError(error), "error");
       } finally {
-        $("forgotButton").disabled = false;
+        $("resetButton").disabled = false;
       }
     });
 
@@ -827,27 +723,24 @@
 
         currentUser = null;
         showAuth();
-        setAuthMode(true);
-        showMessage("authMessage", "You've signed out.", "success");
+        setMode(true);
+        message("authMessage", "Signed out successfully.", "success");
       } catch (error) {
-        console.error("Sign-out error:", error);
-        alert("Couldn't sign out. Reload the page and try again.");
+        message("authMessage", authError(error), "error");
       } finally {
         $("signOutButton").disabled = false;
       }
     });
 
     document.querySelectorAll("[data-section]").forEach((button) => {
-      button.addEventListener("click", () => {
-        showSection(button.dataset.section);
-      });
+      button.addEventListener("click", () => showSection(button.dataset.section));
     });
 
     async function initialize() {
-      if (!window.supabase || !window.supabase.createClient) {
-        showMessage(
+      if (!window.supabase?.createClient) {
+        message(
           "authMessage",
-          "The Supabase library couldn't load. Check your internet connection and reload.",
+          "The Supabase library did not load. Check your internet connection and reload.",
           "error"
         );
         return;
@@ -867,7 +760,6 @@
         );
 
         const { data, error } = await supabase.auth.getSession();
-
         if (error) throw error;
 
         if (data.session?.user) {
@@ -876,26 +768,27 @@
           showAuth();
         }
 
-        supabase.auth.onAuthStateChange((event, session) => {
-          if (event === "SIGNED_OUT") {
-            currentUser = null;
-            showAuth();
-          } else if (event === "SIGNED_IN" && session?.user) {
-            // The form handler also loads the profile after login.
-            currentUser = session.user;
-          }
-        });
+        if (!authListenerRegistered) {
+          authListenerRegistered = true;
+
+          supabase.auth.onAuthStateChange((event, session) => {
+            if (event === "SIGNED_OUT") {
+              currentUser = null;
+              showAuth();
+            }
+          });
+        }
       } catch (error) {
         console.error("Initialization error:", error);
-        showMessage(
+        message(
           "authMessage",
-          "Couldn't initialize your account session. Reload the page and try again.",
+          "Could not initialize your session. Reload and try again.",
           "error"
         );
       }
     }
 
-    setAuthMode(true);
+    setMode(true);
     initialize();
   </script>
 </body>
