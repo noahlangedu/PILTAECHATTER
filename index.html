@@ -2,794 +2,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090914">
-  <title>PILTAE CHATTER</title>
-
-  <style>
-    :root {
-      --bg: #090914;
-      --panel: #141426;
-      --panel2: #1c1c34;
-      --purple: #a16aff;
-      --cyan: #54e6ff;
-      --text: #f4f0ff;
-      --muted: #a8a3c5;
-      --border: #34304e;
-      --red: #ff8298;
-      --green: #70f5b1;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse at top, #261343 0%, transparent 52%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, system-ui, Arial, sans-serif;
-    }
-
-    button, input { font: inherit; }
-
-    header {
-      padding: 22px 0;
-      border-bottom: 1px solid var(--border);
-      background: #090914d9;
-    }
-
-    .container {
-      width: min(1000px, 92%);
-      margin: auto;
-    }
-
-    .brand {
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    .brand span, .accent { color: var(--purple); }
-
-    .tagline {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 5px;
-      letter-spacing: 1px;
-    }
-
-    main { padding: 38px 0; }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .hero h1 {
-      font-size: clamp(35px, 7vw, 60px);
-      letter-spacing: -2px;
-      margin: 0 0 10px;
-    }
-
-    .hero p, .muted {
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .card {
-      background: linear-gradient(145deg, #19192e, #10101e);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      padding: 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 15px 45px #0003;
-    }
-
-    .auth-card {
-      width: min(450px, 100%);
-      margin: auto;
-    }
-
-    h2 { margin-top: 0; }
-
-    label {
-      display: block;
-      margin: 16px 0 7px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      color: var(--text);
-      background: #0a0a17;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px #a16aff22;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 13px;
-      margin-top: 16px;
-      border: 0;
-      border-radius: 10px;
-      background: linear-gradient(100deg, #7c3aed, #a855f7);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .btn.secondary {
-      background: var(--panel2);
-      border: 1px solid var(--border);
-    }
-
-    .btn:disabled { opacity: .6; cursor: wait; }
-
-    .switch {
-      text-align: center;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .link {
-      background: none;
-      border: 0;
-      color: var(--cyan);
-      padding: 5px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .message {
-      display: none;
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 9px;
-      line-height: 1.6;
-      font-size: 13px;
-      overflow-wrap: anywhere;
-    }
-
-    .message.show { display: block; }
-
-    .message.error {
-      color: #ffb6c3;
-      border: 1px solid #ff829855;
-      background: #ff829811;
-    }
-
-    .message.success {
-      color: var(--green);
-      border: 1px solid #70f5b155;
-      background: #70f5b111;
-    }
-
-    .message.info {
-      color: #b9f5ff;
-      border: 1px solid #54e6ff55;
-      background: #54e6ff11;
-    }
-
-    .hidden { display: none !important; }
-
-    .dashboard-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .nav {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    .nav button {
-      padding: 13px 9px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text);
-      background: var(--panel2);
-      cursor: pointer;
-    }
-
-    .nav button:hover { border-color: var(--purple); }
-
-    .feature {
-      background: #0d0d1b;
-      border: 1px solid var(--border);
-      padding: 18px;
-      border-radius: 12px;
-    }
-
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-      padding: 25px 0 35px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PILTAE CHATTER</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#080b12;--panel:#111827;--line:#29394e;--text:#edf4ff;--muted:#93a6bf;--cyan:#55e8ff;--purple:#9265ff;--green:#65f5ac;--red:#ff7086}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top left,#142b42,#080b12 58%);color:var(--text);font:15px/1.5 Segoe UI,Arial,sans-serif;min-height:100vh}
+button,input,textarea{font:inherit}
+button{cursor:pointer;background:#16263a;color:var(--text);border:1px solid #354d6b;border-radius:9px;padding:10px 13px;font-weight:700}
+button:hover{border-color:var(--cyan)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:linear-gradient(110deg,#009ebd,#754cff);border:0}
+.danger{color:#ffb2c0;border-color:#773449}
+input,textarea{width:100%;padding:11px;background:#080f19;color:var(--text);border:1px solid var(--line);border-radius:9px;outline:none}
+input:focus,textarea:focus{border-color:var(--cyan)}
+label{display:block;margin:12px 0 5px;color:var(--muted);font-size:12px}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.tiny{font-size:12px}
+header{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 22px;background:#080b12ed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.brand{font-size:22px;font-weight:1000;letter-spacing:2px}.brand span{color:var(--cyan)}
+.layout{max-width:1400px;margin:20px auto;padding:0 18px;display:grid;grid-template-columns:205px minmax(0,1fr);gap:17px}
+.sidebar,.panel,.authbox{background:linear-gradient(155deg,#121c2c,#0d131e);border:1px solid var(--line);border-radius:15px}
+.sidebar{padding:12px;height:max-content;position:sticky;top:80px}
+.nav{display:flex;flex-direction:column;gap:5px}.nav button{text-align:left;background:transparent;border-color:transparent;color:var(--muted)}.nav button.active{background:#123348;border-color:#20556d;color:var(--cyan)}
+main{min-width:0}.view{display:none}.view.active{display:block}
+.panel{padding:17px;margin-bottom:15px}.hero{padding:23px;border:1px solid #31516d;border-radius:15px;background:linear-gradient(120deg,#112b40,#21183d);margin-bottom:15px}
+h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:12px 0}h1 span{color:var(--cyan)}h2,h3{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.stat,.item{background:#0a121e;border:1px solid var(--line);border-radius:11px;padding:13px}
+.stat strong{display:block;font-size:23px;color:var(--cyan);margin:5px 0}
+.row{display:flex;align-items:center;gap:8px}.grow{flex:1;min-width:0}
+.list{display:flex;flex-direction:column;gap:9px}
+.itemtop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chatlog{height:340px;overflow:auto;padding:10px;background:#070c13;border:1px solid var(--line);border-radius:11px;margin:12px 0}
+.msg{padding:9px;border-bottom:1px solid #1b2736;overflow-wrap:anywhere}.msg:last-child{border:0}
+.msg b{color:var(--cyan)}.msg time{float:right;color:var(--muted);font-size:11px}
+.pill{border:1px solid var(--line);border-radius:99px;padding:5px 9px;font-size:12px;color:var(--cyan)}
+.coins{color:var(--green);font-weight:800}
+.authwrap{max-width:520px;margin:7vh auto;padding:18px}.authbox{padding:25px}
+.formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:15px 0}
+.tile{aspect-ratio:1;padding:0;font-size:23px;background:#172438}
+.tile.safe{background:#123a30;border-color:#2c9c70}.tile.mine{background:#522033;border-color:#ff617c}
+.toast{position:fixed;right:18px;bottom:18px;z-index:9;max-width:90vw;padding:13px 16px;border:1px solid #3d7895;background:#12253a;border-radius:10px;box-shadow:0 10px 35px #0008}
+.toast.error{border-color:var(--red)}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.sidebar{position:static}.nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.nav button{text-align:center;font-size:12px;padding:8px 4px}.grid{grid-template-columns:1fr}header{padding:12px}.brand{font-size:18px}}
+@media(max-width:480px){.stats{grid-template-columns:1fr 1fr}.formrow{grid-template-columns:1fr}}
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="container">
-      <div class="brand">PILTAE <span>CHATTER</span></div>
-      <div class="tagline">YOUR SPACE. YOUR PEOPLE. YOUR COMMUNITY.</div>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="hero">
-      <h1>WELCOME TO <span class="accent">PILTAE</span></h1>
-      <p>A place for your community to connect.</p>
-    </section>
+<div id="authScreen" class="authwrap">
+ <div class="authbox">
+  <div class="brand">PILTAE <span>CHATTER</span></div>
+  <p class="muted">Your community. Your coins. Your world.</p>
+  <div class="formrow">
+   <div><label>Username</label><input id="authUsername" placeholder="piltae_player" autocomplete="username"></div>
+   <div><label>Display name</label><input id="authDisplay" placeholder="Your name"></div>
+  </div>
+  <label>Email</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email">
+  <label>Password</label><input id="authPassword" type="password" placeholder="At least 6 characters" autocomplete="current-password">
+  <div class="row" style="margin-top:15px">
+   <button class="primary grow" id="signIn">Sign in</button>
+   <button class="grow" id="signUp">Create account</button>
+  </div>
+  <button id="resetPassword" style="width:100%;margin-top:9px">Reset password</button>
+  <p class="muted tiny">New accounts start with 1,000 virtual coins. Never reuse another site's password.</p>
+ </div>
+</div>
 
-    <section id="authPanel" class="card auth-card">
-      <h2 id="authTitle">Sign in</h2>
-      <p id="authDescription" class="muted">
-        Welcome back. Sign in to continue.
-      </p>
+<div id="app" class="hidden">
+<header>
+ <div class="brand">PILTAE <span>CHATTER</span></div>
+ <div class="row"><span class="pill" id="coinPill">◈ 0 coins</span><span id="headerName">Player</span><button id="signOut">Sign out</button></div>
+</header>
 
-      <form id="authForm">
-        <div id="nameField" class="hidden">
-          <label for="displayName">Display name</label>
-          <input
-            id="displayName"
-            type="text"
-            maxlength="32"
-            autocomplete="nickname"
-            placeholder="Your public name"
-          >
-        </div>
+<div class="layout">
+<aside class="sidebar">
+ <div class="muted tiny" style="padding:8px">MAIN MENU</div>
+ <nav class="nav" id="nav">
+  <button class="active" data-view="home">⌂ Overview</button>
+  <button data-view="chat">▤ Community Chat</button>
+  <button data-view="friends">♧ Friends & DMs</button>
+  <button data-view="groups">▣ Group Chats</button>
+  <button data-view="shop">◈ Shop</button>
+  <button data-view="leaderboard">♛ Leaderboard</button>
+  <button data-view="mines">✦ Mines</button>
+  <button data-view="events">◷ Events</button>
+  <button data-view="profile">⚙ Profile</button>
+  <button data-view="admin" id="adminNav" class="hidden">⚡ Owner Tools</button>
+ </nav>
+ <p class="muted tiny" style="padding:8px">PILTAE CHATTER</p>
+</aside>
 
-        <label for="email">Email address</label>
-        <input
-          id="email"
-          type="email"
-          autocomplete="email"
-          required
-          placeholder="you@example.com"
-        >
+<main>
+<section class="view active" id="view-home">
+ <div class="hero">
+  <div class="pill">COMMUNITY HUB</div>
+  <h1>Welcome to <span>PILTAE CHATTER</span></h1>
+  <p class="muted">Talk with friends, earn coins, shop, and climb the leaderboard.</p>
+  <div class="row"><button class="primary" data-goto="chat">Open chat</button><button data-goto="shop">Visit shop</button></div>
+ </div>
+ <div class="stats">
+  <div class="stat">Your balance<strong id="homeCoins">—</strong><span class="muted tiny">virtual coins</span></div>
+  <div class="stat">Your rank<strong id="homeRank">—</strong><span class="muted tiny">by balance</span></div>
+  <div class="stat">Shop items<strong id="homeItems">—</strong><span class="muted tiny">available</span></div>
+ </div>
+ <div class="grid" style="margin-top:14px">
+  <div class="panel"><h3>Latest chat</h3><div id="homeMessages" class="list"></div><button data-goto="chat">Open community chat →</button></div>
+  <div class="panel"><h3>Upcoming events</h3><div id="homeEvents" class="list"></div><button data-goto="events">View events →</button></div>
+ </div>
+</section>
 
-        <label for="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          minlength="6"
-          autocomplete="current-password"
-          required
-          placeholder="Your password"
-        >
+<section class="view" id="view-chat">
+ <div class="panel"><h2>Community Chat</h2><p class="muted">Messages are visible to signed-in members.</p>
+  <div id="communityLog" class="chatlog"></div>
+  <form id="communityForm" class="row"><input id="communityInput" class="grow" maxlength="2000" placeholder="Write a message…" required><button class="primary">Send</button></form>
+  <p class="muted tiny">Pay another user with <code>/pay username amount</code>.</p>
+ </div>
+</section>
 
-        <button id="submitButton" class="btn" type="submit">
-          Sign in
-        </button>
-      </form>
+<section class="view" id="view-friends">
+ <div class="grid">
+  <div class="panel"><h2>Add Friend</h2><label>Username</label><input id="friendUsername" placeholder="username"><button id="sendFriend" class="primary" style="margin-top:10px">Send request</button></div>
+  <div class="panel"><h2>Incoming Requests</h2><div id="incomingFriends" class="list"></div></div>
+ </div>
+ <div class="panel"><h2>Your Friends</h2><div id="friendList" class="list"></div></div>
+ <div class="panel"><h2>Private Messages</h2><label>Friend username</label><input id="dmUsername" placeholder="friend_username"><div id="dmLog" class="chatlog"></div>
+  <form id="dmForm" class="row"><input id="dmInput" class="grow" maxlength="2000" placeholder="Private message…" required><button class="primary">Send</button></form>
+ </div>
+</section>
 
-      <button id="resetButton" class="btn secondary" type="button">
-        Reset password
-      </button>
+<section class="view" id="view-groups">
+ <div class="panel"><h2>Create a Group</h2><form id="createGroup" class="row"><input id="groupName" class="grow" maxlength="80" placeholder="Group name" required><button class="primary">Create group</button></form></div>
+ <div class="grid">
+  <div class="panel"><h2>Your Groups</h2><div id="groupList" class="list"></div></div>
+  <div class="panel"><h2 id="groupTitle">Group Chat</h2>
+   <label>Invite username</label><div class="row"><input id="inviteUsername" class="grow" placeholder="username"><button id="inviteUser">Invite</button></div>
+   <div id="groupLog" class="chatlog"></div>
+   <form id="groupForm" class="row"><input id="groupInput" class="grow" maxlength="2000" placeholder="Group message…" required><button class="primary">Send</button></form>
+   <button id="deleteGroup" class="danger" style="margin-top:10px">Delete group</button>
+  </div>
+ </div>
+</section>
 
-      <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+<section class="view" id="view-shop">
+ <div class="hero"><h1>Community <span>Shop</span></h1><p class="muted">Buy items with your virtual coins.</p></div>
+ <div id="shopList" class="grid"></div>
+ <div class="panel"><h2>Purchase History</h2><div id="purchases" class="list"></div></div>
+</section>
 
-      <div class="switch">
-        <span id="switchText">New here?</span>
-        <button id="switchButton" class="link" type="button">
-          Create account
-        </button>
-      </div>
-    </section>
+<section class="view" id="view-leaderboard">
+ <div class="panel"><h2>♛ Coin Leaderboard</h2><p class="muted">Members ranked by coin balance.</p><div id="leaderboardList" class="list"></div></div>
+</section>
 
-    <section id="dashboard" class="hidden">
-      <div class="card">
-        <div class="dashboard-top">
-          <div>
-            <h2>Welcome, <span id="welcomeName">Member</span></h2>
-            <div id="profileStatus" class="muted"></div>
-          </div>
-          <span class="badge">● SIGNED IN</span>
-        </div>
+<section class="view" id="view-mines">
+ <div class="hero"><h1>Mines <span>Arcade</span></h1><p class="muted">Pick safe tiles, grow your payout, and cash out. Virtual coins only.</p></div>
+ <div class="panel">
+  <div class="formrow"><div><label>Bet</label><input id="minesBet" type="number" min="1" value="100"></div><div><label>Mines (1–24)</label><input id="minesCount" type="number" min="1" max="24" value="3"></div></div>
+  <div class="row" style="margin-top:12px"><button id="minesStart" class="primary">Start game</button><button id="minesCashout" disabled>Cash out</button><span id="minesStatus" class="muted">Start a game to play.</span></div>
+  <div id="minesTiles" class="tiles"></div><p id="minesPayout" class="muted tiny"></p>
+ </div>
+</section>
 
-        <button id="signOutButton" class="btn secondary" type="button">
-          Sign out
-        </button>
-      </div>
+<section class="view" id="view-events">
+ <div class="panel"><h2>Community Events</h2><div id="eventList" class="list"></div></div>
+</section>
 
-      <nav class="nav" aria-label="Main navigation">
-        <button data-section="community">Community</button>
-        <button data-section="messages">Messages</button>
-        <button data-section="friends">Friends</button>
-        <button data-section="groups">Groups</button>
-        <button data-section="wallet">Wallet</button>
-        <button data-section="leaderboard">Leaderboard</button>
-        <button data-section="events">Events</button>
-        <button data-section="mines">Mines</button>
-        <button data-section="shop">Shop</button>
-        <button data-section="profile">Profile</button>
-      </nav>
+<section class="view" id="view-profile">
+ <div class="panel"><h2>Your Profile</h2><label>Username</label><input id="profileUsername" disabled><label>Display name</label><input id="profileDisplay" maxlength="40"><button id="saveProfile" class="primary" style="margin-top:12px">Save profile</button><p class="muted tiny">Your email is not shown on your public profile.</p></div>
+</section>
 
-      <section class="card">
-        <h2 id="sectionTitle">Community</h2>
-        <p id="sectionDescription" class="muted"></p>
-        <div id="sectionContent"></div>
-      </section>
-    </section>
-  </main>
+<section class="view" id="view-admin">
+ <div class="panel"><h2>⚡ Owner Tools</h2><p class="muted">Owner access is tied to noahlangedu@gmail.com.</p>
+  <h3>Grant Coins</h3><div class="row"><input id="grantUsername" class="grow" placeholder="username"><input id="grantAmount" type="number" min="1" value="10000" style="max-width:140px"><button id="grantCoins" class="primary">Grant</button></div>
+  <h3 style="margin-top:25px">Create Event</h3><form id="eventForm"><label>Title</label><input id="eventTitle" required maxlength="100"><label>Description</label><textarea id="eventDescription" maxlength="2000"></textarea><label>Start time</label><input id="eventDate" type="datetime-local" required><button class="primary" style="margin-top:12px">Publish event</button></form>
+  <h3 style="margin-top:25px">Add Shop Item</h3><form id="itemForm"><label>Item name</label><input id="itemName" required maxlength="100"><label>Description</label><input id="itemDescription" maxlength="500"><label>Price</label><input id="itemPrice" type="number" min="0" required><button class="primary" style="margin-top:12px">Add item</button></form>
+ </div>
+</section>
+</main>
+</div>
+</div>
+<div id="toast" class="toast hidden"></div>
 
-  <footer>PILTAE CHATTER · Built for the community</footer>
+<script>
+(() => {
+  const URL = "https://erdmambofrurnieznurd.supabase.co";
+  const KEY = "sb_publishable_pJMItt5PjLrsuFxStW2YNQ_OrJNJqpv";
+  const SITE = "https://noahlangedu.github.io/piltaechatter/";
+  const db = window.supabase.createClient(URL, KEY);
+  const $ = id => document.getElementById(id);
+  let user = null, profile = null, activeGroup = null, mines = null;
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+  const fmt = n => Number(n || 0).toLocaleString();
+  const isOwner = () => user?.email?.toLowerCase() === "noahlangedu@gmail.com";
+  async function run(query) {
+    const {data,error} = await query;
+    if (error) throw error;
+    return data;
+  }
+  function notify(message,error=false) {
+    const t=$("toast");
+    t.textContent=message;
+    t.classList.remove("hidden","error");
+    if(error)t.classList.add("error");
+    clearTimeout(notify.timer);
+    notify.timer=setTimeout(()=>t.classList.add("hidden"),4500);
+  }
 
-  <script>
-    "use strict";
-
-    const SUPABASE_URL =
-      "https://erdmambofrurnieznurd.supabase.co";
-
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_pJMItt5PjLrsuFxStW2YNQ_OrJNJqpv";
-
-    const SITE_URL =
-      "https://noahlangedu.github.io/piltaechatter/";
-
-    let supabase = null;
-    let currentUser = null;
-    let loginMode = true;
-    let authListenerRegistered = false;
-
-    const $ = (id) => document.getElementById(id);
-
-    function message(id, text, type = "info") {
-      const el = $(id);
-      el.textContent = text;
-      el.className = "message show " + type;
-    }
-
-    function clearMessage(id) {
-      $(id).textContent = "";
-      $(id).className = "message";
-    }
-
-    function cleanName(value) {
-      return String(value || "").trim().replace(/\s+/g, " ").slice(0, 32);
-    }
-
-    function fallbackName(user) {
-      return cleanName(user?.user_metadata?.display_name) ||
-        cleanName(user?.user_metadata?.username) ||
-        "Member";
-    }
-
-    function showAuth() {
-      $("authPanel").classList.remove("hidden");
-      $("dashboard").classList.add("hidden");
-    }
-
-    function showDashboard() {
-      $("authPanel").classList.add("hidden");
-      $("dashboard").classList.remove("hidden");
-    }
-
-    function setMode(isLogin) {
-      loginMode = isLogin;
-
-      $("authTitle").textContent = isLogin ? "Sign in" : "Create account";
-      $("authDescription").textContent = isLogin
-        ? "Welcome back. Sign in to continue."
-        : "Choose the display name people will see.";
-
-      $("submitButton").textContent = isLogin
-        ? "Sign in"
-        : "Create account";
-
-      $("switchText").textContent = isLogin
-        ? "New here?"
-        : "Already have an account?";
-
-      $("switchButton").textContent = isLogin
-        ? "Create account"
-        : "Sign in";
-
-      $("nameField").classList.toggle("hidden", isLogin);
-      $("displayName").required = !isLogin;
-      $("password").autocomplete = isLogin
-        ? "current-password"
-        : "new-password";
-
-      clearMessage("authMessage");
-    }
-
-    function authError(error) {
-      const raw = String(error?.message || "");
-      const lower = raw.toLowerCase();
-
-      console.error("PILTAE CHATTER authentication error:", {
-        message: raw,
-        code: error?.code,
-        status: error?.status
-      });
-
-      if (
-        lower.includes("invalid login credentials") ||
-        lower.includes("invalid credentials")
-      ) {
-        return "Incorrect email or password. Check your details and try again.";
-      }
-
-      if (lower.includes("email not confirmed")) {
-        return "Your email is not confirmed. Open your latest confirmation email and follow its link.";
-      }
-
-      if (
-        lower.includes("rate limit") ||
-        lower.includes("too many requests")
-      ) {
-        return "Supabase has temporarily limited email requests. Wait before trying again, or configure custom SMTP in Supabase.";
-      }
-
-      if (
-        lower.includes("already registered") ||
-        lower.includes("already been registered")
-      ) {
-        return "This email already has an account. Switch to Sign in.";
-      }
-
-      if (
-        lower.includes("row-level security") ||
-        lower.includes("permission denied") ||
-        lower.includes("violates row-level security")
-      ) {
-        return "Your account signed in, but the profile database denied access. Check the profiles table policies and rerun the provided profile SQL.";
-      }
-
-      if (lower.includes("network") || lower.includes("fetch")) {
-        return "Could not connect to Supabase. Check your connection and reload.";
-      }
-
-      return raw
-        ? "Request failed: " + raw
-        : "Something went wrong. Open your browser console for details.";
-    }
-
-    async function saveProfile(user, requestedName = "") {
-      const nameFromForm = cleanName(requestedName);
-      const metadataName = fallbackName(user);
-      const chosenName = nameFromForm || metadataName;
-
-      // Read the user's existing profile first so existing names are preserved.
-      const { data: existing, error: readError } = await supabase
-        .from("profiles")
-        .select("id, username, display_name")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      if (readError) {
-        console.error("Profile read error:", readError);
-        $("profileStatus").textContent =
-          "Signed in, but the profile could not be loaded. Check the profiles table and its policies.";
-        $("welcomeName").textContent = chosenName;
-        return;
-      }
-
-      const savedName =
-        nameFromForm ||
-        cleanName(existing?.display_name) ||
-        cleanName(existing?.username) ||
-        metadataName;
-
-      // Upsert creates a missing row or updates the name in an existing row.
-      const { data, error } = await supabase
-        .from("profiles")
-        .upsert(
-          {
-            id: user.id,
-            username: savedName,
-            display_name: savedName
-          },
-          { onConflict: "id" }
-        )
-        .select("id, username, display_name")
-        .single();
-
-      if (error) {
-        console.error("Profile save error:", error);
-        $("welcomeName").textContent = savedName;
-        $("profileStatus").textContent =
-          "Signed in, but saving the display name failed. Check the profiles schema, unique ID, and security policies.";
-        return;
-      }
-
-      $("welcomeName").textContent =
-        cleanName(data.display_name) ||
-        cleanName(data.username) ||
-        savedName;
-
-      $("profileStatus").textContent = "Your profile is ready.";
-    }
-
-    async function enterDashboard(user, preferredName = "") {
-      if (!user) return;
-
-      currentUser = user;
-      showDashboard();
-
-      // Email is intentionally not shown in the dashboard.
-      $("welcomeName").textContent =
-        cleanName(preferredName) || fallbackName(user);
-
-      $("profileStatus").textContent = "Loading profile...";
-      await saveProfile(user, preferredName);
-      showSection("community");
-    }
-
-    const sections = {
-      community: [
-        "Community",
-        "The community chat interface still needs to be connected to your chat_messages table."
-      ],
-      messages: [
-        "Private Messages",
-        "Private messaging needs its own interface and database policies."
-      ],
-      friends: [
-        "Friends",
-        "Friend requests and friendships need to be connected."
-      ],
-      groups: [
-        "Groups",
-        "Group creation, invitations, and membership controls need to be connected."
-      ],
-      wallet: [
-        "Wallet",
-        "Coin balances and payments must be validated securely on the server."
-      ],
-      leaderboard: [
-        "Leaderboard",
-        "Leaderboard data needs to be connected to your database."
-      ],
-      events: [
-        "Events",
-        "Event creation and attendance features need to be connected."
-      ],
-      mines: [
-        "Mines",
-        "The game needs secure server-side game and payout logic."
-      ],
-      shop: [
-        "Shop",
-        "Shop inventory and purchases need server-side validation."
-      ],
-      profile: [
-        "Profile",
-        "Your display name is shown above. Profile editing can be added next."
-      ]
+  function goto(name) {
+    document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id==="view-"+name));
+    document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===name));
+    const actions={
+      home:refreshHome,chat:loadChat,friends:loadFriends,groups:loadGroups,
+      shop:loadShop,leaderboard:loadLeaderboard,mines:loadMinesState,events:loadEvents
     };
+    if(actions[name]) actions[name]().catch(e=>notify(e.message,true));
+  }
+  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>goto(b.dataset.view));
+  document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>goto(b.dataset.goto));
 
-    function showSection(key) {
-      const selected = sections[key] || sections.community;
-      $("sectionTitle").textContent = selected[0];
-      $("sectionDescription").textContent = selected[1];
-
-      const content = $("sectionContent");
-      content.replaceChildren();
-
-      const card = document.createElement("div");
-      card.className = "feature";
-
-      const title = document.createElement("strong");
-      title.textContent = selected[0];
-
-      const description = document.createElement("p");
-      description.className = "muted";
-      description.textContent = selected[1];
-
-      card.append(title, description);
-      content.appendChild(card);
+  async function loadProfile() {
+    profile=await run(db.from("pc_profiles").select("*").eq("id",user.id).single());
+  }
+  function showApp() {
+    $("authScreen").classList.add("hidden");
+    $("app").classList.remove("hidden");
+    $("headerName").textContent=profile.display_name;
+    $("coinPill").textContent="◈ "+fmt(profile.coins)+" coins";
+    $("profileUsername").value=profile.username;
+    $("profileDisplay").value=profile.display_name;
+    $("adminNav").classList.toggle("hidden",!isOwner());
+  }
+  async function syncSession() {
+    const {data:{session}}=await db.auth.getSession();
+    if(!session) {
+      user=null;profile=null;
+      $("app").classList.add("hidden");
+      $("authScreen").classList.remove("hidden");
+      return;
     }
+    user=session.user;
+    try { await loadProfile();showApp();await refreshHome(); }
+    catch(e) { notify("Profile setup issue: "+e.message,true); }
+  }
 
-    $("authForm").addEventListener("submit", async (event) => {
-      event.preventDefault();
+  $("signIn").onclick=async()=>{
+    try {
+      await run(db.auth.signInWithPassword({
+        email:$("authEmail").value.trim(),
+        password:$("authPassword").value
+      }));
+      await syncSession();notify("Signed in.");
+    } catch(e) { notify(e.message,true); }
+  };
 
-      if (!supabase) {
-        message("authMessage", "Supabase is not ready. Reload the page.", "error");
-        return;
-      }
+  $("signUp").onclick=async()=>{
+    try {
+      const email=$("authEmail").value.trim();
+      const password=$("authPassword").value;
+      const username=$("authUsername").value.trim().toLowerCase();
+      const display_name=$("authDisplay").value.trim()||username;
+      if(!/^[a-z0-9_]{3,24}$/.test(username))
+        throw Error("Username must be 3–24 letters, numbers, or underscores.");
+      if(password.length<6) throw Error("Password must be at least 6 characters.");
+      const result=await run(db.auth.signUp({
+        email,password,
+        options:{emailRedirectTo:SITE,data:{username,display_name}}
+      }));
+      if(result.session) await syncSession();
+      else notify("Account created. Confirm your email, then sign in.");
+    } catch(e) { notify(e.message,true); }
+  };
 
-      const email = $("email").value.trim();
-      const password = $("password").value;
-      const displayName = cleanName($("displayName").value);
-      const submit = $("submitButton");
+  $("resetPassword").onclick=async()=>{
+    try {
+      const email=$("authEmail").value.trim();
+      if(!email) throw Error("Enter your email first.");
+      await run(db.auth.resetPasswordForEmail(email,{redirectTo:SITE}));
+      notify("If the account exists, a reset email has been sent.");
+    } catch(e) { notify(e.message,true); }
+  };
+  $("signOut").onclick=async()=>{await db.auth.signOut();await syncSession();};
 
-      if (!loginMode && !displayName) {
-        message("authMessage", "Enter a display name first.", "error");
-        return;
-      }
+  async function refreshHome() {
+    await loadProfile();
+    $("headerName").textContent=profile.display_name;
+    $("coinPill").textContent="◈ "+fmt(profile.coins)+" coins";
+    $("homeCoins").textContent=fmt(profile.coins);
+    const [ranked,items]=await Promise.all([
+      run(db.from("pc_profiles").select("id,coins").order("coins",{ascending:false}).limit(1000)),
+      run(db.from("pc_shop_items").select("id").eq("active",true))
+    ]);
+    const index=ranked.findIndex(p=>p.id===user.id);
+    $("homeRank").textContent=index<0?"—":"#"+(index+1);
+    $("homeItems").textContent=items.length;
+    await Promise.all([loadHomeMessages(),loadHomeEvents()]);
+  }
 
-      submit.disabled = true;
-      submit.textContent = loginMode ? "Signing in..." : "Creating account...";
-      clearMessage("authMessage");
+  async function loadHomeMessages() {
+    const rows=await run(db.from("pc_messages").select("id,body,sender_id,created_at")
+      .order("created_at",{ascending:false}).limit(3));
+    const ids=[...new Set(rows.map(m=>m.sender_id))];
+    const people=ids.length?await run(db.from("pc_profiles").select("id,username,display_name").in("id",ids)):[];
+    const byId=Object.fromEntries(people.map(p=>[p.id,p]));
+    $("homeMessages").innerHTML=rows.reverse().map(m=>`<div class="item"><b>${esc(byId[m.sender_id]?.display_name||"Player")}</b><div>${esc(m.body)}</div></div>`).join("")||'<p class="muted">No messages yet.</p>';
+  }
 
-      try {
-        if (loginMode) {
-          const { data, error } = await supabase.auth.signInWithPassword({
-            email,
-            password
-          });
+  async function loadChat() {
+    const rows=await run(db.from("pc_messages").select("id,body,sender_id,created_at")
+      .order("created_at",{ascending:true}).limit(150));
+    const ids=[...new Set(rows.map(m=>m.sender_id))];
+    const people=ids.length?await run(db.from("pc_profiles").select("id,username,display_name").in("id",ids)):[];
+    const byId=Object.fromEntries(people.map(p=>[p.id,p]));
+    $("communityLog").innerHTML=rows.map(m=>`<div class="msg"><time>${new Date(m.created_at).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}</time><b>${esc(byId[m.sender_id]?.display_name||"Player")}</b><div>${esc(m.body)}</div></div>`).join("");
+    $("communityLog").scrollTop=$("communityLog").scrollHeight;
+  }
 
-          if (error) throw error;
-
-          await enterDashboard(data.user);
-          message("authMessage", "Signed in successfully.", "success");
-        } else {
-          const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-              emailRedirectTo: SITE_URL,
-              data: {
-                display_name: displayName,
-                username: displayName
-              }
-            }
-          });
-
-          if (error) throw error;
-
-          if (data.session && data.user) {
-            await enterDashboard(data.user, displayName);
-            message("authMessage", "Account created successfully.", "success");
-          } else {
-            message(
-              "authMessage",
-              "Signup submitted. Check your email and confirm your account before signing in. If no email arrives, check Supabase's email settings and rate limits.",
-              "success"
-            );
-          }
-        }
-      } catch (error) {
-        message("authMessage", authError(error), "error");
-      } finally {
-        submit.disabled = false;
-        submit.textContent = loginMode ? "Sign in" : "Create account";
-      }
-    });
-
-    $("switchButton").addEventListener("click", () => {
-      setMode(!loginMode);
-    });
-
-    $("resetButton").addEventListener("click", async () => {
-      if (!supabase) return;
-
-      const email = $("email").value.trim();
-
-      if (!email) {
-        message("authMessage", "Enter your email address first.", "error");
-        $("email").focus();
-        return;
-      }
-
-      $("resetButton").disabled = true;
-
-      try {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: SITE_URL
-        });
-
-        if (error) throw error;
-
-        message(
-          "authMessage",
-          "If a reset email can be sent for this account, it will arrive shortly. Check your inbox and spam folder.",
-          "success"
-        );
-      } catch (error) {
-        message("authMessage", authError(error), "error");
-      } finally {
-        $("resetButton").disabled = false;
-      }
-    });
-
-    $("signOutButton").addEventListener("click", async () => {
-      if (!supabase) return;
-
-      $("signOutButton").disabled = true;
-
-      try {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
-
-        currentUser = null;
-        showAuth();
-        setMode(true);
-        message("authMessage", "Signed out successfully.", "success");
-      } catch (error) {
-        message("authMessage", authError(error), "error");
-      } finally {
-        $("signOutButton").disabled = false;
-      }
-    });
-
-    document.querySelectorAll("[data-section]").forEach((button) => {
-      button.addEventListener("click", () => showSection(button.dataset.section));
-    });
-
-    async function initialize() {
-      if (!window.supabase?.createClient) {
-        message(
-          "authMessage",
-          "The Supabase library did not load. Check your internet connection and reload.",
-          "error"
-        );
-        return;
-      }
-
-      try {
-        supabase = window.supabase.createClient(
-          SUPABASE_URL,
-          SUPABASE_PUBLISHABLE_KEY,
-          {
-            auth: {
-              persistSession: true,
-              autoRefreshToken: true,
-              detectSessionInUrl: true
-            }
-          }
-        );
-
-        const { data, error } = await supabase.auth.getSession();
-        if (error) throw error;
-
-        if (data.session?.user) {
-          await enterDashboard(data.session.user);
-        } else {
-          showAuth();
-        }
-
-        if (!authListenerRegistered) {
-          authListenerRegistered = true;
-
-          supabase.auth.onAuthStateChange((event, session) => {
-            if (event === "SIGNED_OUT") {
-              currentUser = null;
-              showAuth();
-            }
-          });
-        }
-      } catch (error) {
-        console.error("Initialization error:", error);
-        message(
-          "authMessage",
-          "Could not initialize your session. Reload and try again.",
-          "error"
-        );
-      }
+  async function sendPublic(body) {
+    body=body.trim();
+    if(!body)return;
+    if(body.startsWith("/pay ")) {
+      const parts=body.split(/\s+/);
+      if(parts.length!==3)throw Error("Use /pay username amount");
+      const amount=Number(parts[2]);
+      if(!Number.isSafeInteger(amount)||amount<1)throw Error("Amount must be a positive whole number.");
+      await run(db.rpc("pc_pay",{p_username:parts[1],p_amount:amount}));
+      notify("Payment sent.");
+      await refreshHome();
+      return;
     }
+    await run(db.from("pc_messages").insert({sender_id:user.id,body}));
+    $("communityInput").value="";
+    await loadChat();await loadHomeMessages();
+  }
+  $("communityForm").onsubmit=async e=>{
+    e.preventDefault();
+    try { await sendPublic($("communityInput").value);$("communityInput").value=""; }
+    catch(err) { notify(err.message,true); }
+  };
 
-    setMode(true);
-    initialize();
-  </script>
+  async function loadFriends() {
+    const req=await run(db.from("pc_friend_requests").select("*")
+      .or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`).order("created_at",{ascending:false}));
+    const ids=[...new Set(req.flatMap(r=>[r.sender_id,r.receiver_id]).filter(id=>id!==user.id))];
+    const people=ids.length?await run(db.from("pc_profiles").select("id,username,display_name").in("id",ids)):[];
+    const byId=Object.fromEntries(people.map(p=>[p.id,p]));
+
+    $("incomingFriends").innerHTML=req.filter(r=>r.receiver_id===user.id&&r.status==="pending").map(r=>
+      `<div class="item"><b>${esc(byId[r.sender_id]?.display_name||byId[r.sender_id]?.username||"Player")}</b>
+      <div class="row" style="margin-top:8px"><button data-accept="${r.id}">Accept</button><button class="danger" data-decline="${r.id}">Decline</button></div></div>`
+    ).join("")||'<p class="muted">No incoming requests.</p>';
+
+    const accepted=req.filter(r=>r.status==="accepted");
+    $("friendList").innerHTML=accepted.map(r=>{
+      const id=r.sender_id===user.id?r.receiver_id:r.sender_id;
+      return `<div class="item itemtop"><div><b>${esc(byId[id]?.display_name||"Friend")}</b><div class="muted tiny">@${esc(byId[id]?.username||"")}</div></div><button data-dm="${esc(byId[id]?.username||"")}">Message</button></div>`;
+    }).join("")||'<p class="muted">No friends yet.</p>';
+
+    document.querySelectorAll("[data-accept]").forEach(b=>b.onclick=async()=>{
+      try { await run(db.from("pc_friend_requests").update({status:"accepted"}).eq("id",b.dataset.accept));await loadFriends();notify("Friend added."); }
+      catch(e){notify(e.message,true);}
+    });
+    document.querySelectorAll("[data-decline]").forEach(b=>b.onclick=async()=>{
+      try { await run(db.from("pc_friend_requests").update({status:"declined"}).eq("id",b.dataset.decline));await loadFriends(); }
+      catch(e){notify(e.message,true);}
+    });
+    document.querySelectorAll("[data-dm]").forEach(b=>b.onclick=()=>{$("dmUsername").value=b.dataset.dm;loadDM().catch(e=>notify(e.message,true));});
+  }
+
+  $("sendFriend").onclick=async()=>{
+    try {
+      const name=$("friendUsername").value.trim();
+      if(!name)throw Error("Enter a username.");
+      const p=await run(db.from("pc_profiles").select("id").ilike("username",name).single());
+      if(p.id===user.id)throw Error("You can't add yourself.");
+      const existing=await run(db.from("pc_friend_requests").select("id,status,sender_id,receiver_id")
+        .or(`and(sender_id.eq.${user.id},receiver_id.eq.${p.id}),and(sender_id.eq.${p.id},receiver_id.eq.${user.id})`));
+      if(existing.some(r=>r.status==="accepted"))throw Error("You're already friends.");
+      if(existing.some(r=>r.status==="pending"))throw Error("A pending request already exists.");
+      await run(db.from("pc_friend_requests").insert({sender_id:user.id,receiver_id:p.id}));
+      $("friendUsername").value="";notify("Friend request sent.");await loadFriends();
+    } catch(e){notify(e.message,true);}
+  };
+
+  async function loadDM() {
+    const name=$("dmUsername").value.trim();
+    if(!name)return;
+    const other=await run(db.from("pc_profiles").select("id,username").ilike("username",name).single());
+    const rows=await run(db.from("pc_private_messages").select("*")
+      .or(`and(sender_id.eq.${user.id},receiver_id.eq.${other.id}),and(sender_id.eq.${other.id},receiver_id.eq.${user.id})`)
+      .order("created_at").limit(100));
+    $("dmLog").innerHTML=rows.map(m=>`<div class="msg"><b>${m.sender_id===user.id?"You":esc(other.username)}</b><div>${esc(m.body)}</div></div>`).join("");
+    $("dmLog").scrollTop=$("dmLog").scrollHeight;
+  }
+  $("dmUsername").addEventListener("change",()=>loadDM().catch(e=>notify(e.message,true)));
+  $("dmForm").onsubmit=async e=>{
+    e.preventDefault();
+    try {
+      const other=await run(db.from("pc_profiles").select("id").ilike("username",$("dmUsername").value.trim()).single());
+      await run(db.from("pc_private_messages").insert({sender_id:user.id,receiver_id:other.id,body:$("dmInput").value.trim()}));
+      $("dmInput").value="";await loadDM();
+    } catch(err){notify(err.message,true);}
+  };
+
+  async function loadGroups() {
+    const memberships=await run(db.from("pc_group_members").select("group_id,role")
+      .eq("user_id",user.id));
+    const ids=memberships.map(m=>m.group_id);
+    const groups=ids.length?await run(db.from("pc_groups").select("*").in("id",ids)): [];
+    $("groupList").innerHTML=groups.map(g=>
+      `<div class="item itemtop"><div><b>${esc(g.name)}</b><div class="muted tiny">${g.owner_id===user.id?"Owner":"Member"}</div></div><button data-open-group="${g.id}">Open</button></div>`
+    ).join("")||'<p class="muted">No groups yet. Create one.</p>';
+    document.querySelectorAll("[data-open-group]").forEach(b=>b.onclick=()=>openGroup(Number(b.dataset.openGroup)).catch(e=>notify(e.message,true)));
+  }
+
+  $("createGroup").onsubmit=async e=>{
+    e.preventDefault();
+    try {
+      const g=await run(db.from("pc_groups").insert({name:$("groupName").value.trim(),owner_id:user.id}).select().single());
+      await run(db.from("pc_group_members").insert({group_id:g.id,user_id:user.id,role:"owner"}));
+      $("groupName").value="";await loadGroups();await openGroup(g.id);notify("Group created.");
+    } catch(err){notify(err.message,true);}
+  };
+
+  async function openGroup(id) {
+    const member=await run(db.from("pc_group_members").select("group_id").eq("group_id",id).eq("user_id",user.id).maybeSingle());
+    if(!member)throw Error("You aren't a member of that group.");
+    activeGroup=id;
+    const g=await run(db.from("pc_groups").select("*").eq("id",id).single());
+    $("groupTitle").textContent=g.name;
+    $("deleteGroup").disabled=g.owner_id!==user.id&&!isOwner();
+    const rows=await run(db.from("pc_group_messages").select("*").eq("group_id",id).order("created_at").limit(150));
+    const ids=[...new Set(rows.map(m=>m.sender_id))];
+    const people=ids.length?await run(db.from("pc_profiles").select("id,display_name").in("id",ids)):[];
+    const byId=Object.fromEntries(people.map(p=>[p.id,p]));
+    $("groupLog").innerHTML=rows.map(m=>`<div class="msg"><b>${esc(byId[m.sender_id]?.display_name||"Player")}</b><div>${esc(m.body)}</div></div>`).join("");
+    $("groupLog").scrollTop=$("groupLog").scrollHeight;
+  }
+
+  $("groupForm").onsubmit=async e=>{
+    e.preventDefault();
+    try {
+      if(!activeGroup)throw Error("Open a group first.");
+      await run(db.from("pc_group_messages").insert({group_id:activeGroup,sender_id:user.id,body:$("groupInput").value.trim()}));
+      $("groupInput").value="";await openGroup(activeGroup);
+    } catch(err){notify(err.message,true);}
+  };
+
+  $("inviteUser").onclick=async()=>{
+    try {
+      if(!activeGroup)throw Error("Open a group first.");
+      const name=$("inviteUsername").value.trim();
+      const p=await run(db.from("pc_profiles").select("id").ilike("username",name).single());
+      await run(db.from("pc_group_members").insert({group_id:activeGroup,user_id:p.id,role:"member"}));
+      $("inviteUsername").value="";notify("User invited.");await loadGroups();
+    } catch(e){notify(e.message,true);}
+  };
+
+  $("deleteGroup").onclick=async()=>{
+    try {
+      if(!activeGroup)throw Error("Open a group first.");
+      if(!confirm("Delete this group and its messages?"))return;
+      await run(db.from("pc_groups").delete().eq("id",activeGroup));
+      activeGroup=null;$("groupLog").innerHTML="";await loadGroups();notify("Group deleted.");
+    } catch(e){notify(e.message,true);}
+  };
+
+  async function loadShop() {
+    const items=await run(db.from("pc_shop_items").select("*").eq("active",true).order("price"));
+    $("shopList").innerHTML=items.map(i=>`<div class="panel"><h3>${esc(i.name)}</h3><p class="muted">${esc(i.description)}</p><div class="coins">◈ ${fmt(i.price)} coins</div><button class="primary" data-buy="${i.id}" style="margin-top:12px">Buy item</button></div>`).join("")||'<p class="muted">The shop is empty.</p>';
+    document.querySelectorAll("[data-buy]").forEach(b=>b.onclick=async()=>{
+      try {await run(db.rpc("pc_buy_item",{p_item_id:Number(b.dataset.buy)}));notify("Purchase successful.");await refreshHome();await loadShop();}
+      catch(e){notify(e.message,true);}
+    });
+    const purchases=await run(db.from("pc_purchases").select("id,price_paid,purchased_at,item_id").eq("buyer_id",user.id).order("purchased_at",{ascending:false}).limit(20));
+    const itemIds=[...new Set(purchases.map(p=>p.item_id))];
+    const names=itemIds.length?await run(db.from("pc_shop_items").select("id,name").in("id",itemIds)):[];
+    const byId=Object.fromEntries(names.map(i=>[i.id,i.name]));
+    $("purchases").innerHTML=purchases.map(p=>`<div class="item itemtop"><span>${esc(byId[p.item_id]||"Shop item")}</span><span class="muted">−${fmt(p.price_paid)} coins</span></div>`).join("")||'<p class="muted">No purchases yet.</p>';
+  }
+
+  async function loadLeaderboard() {
+    const rows=await run(db.from("pc_profiles").select("id,username,display_name,coins").order("coins",{ascending:false}).limit(100));
+    $("leaderboardList").innerHTML=rows.map((p,i)=>`<div class="item itemtop"><div><b>${i+1}. ${esc(p.display_name)}</b><div class="muted tiny">@${esc(p.username)}${p.id===user.id?" · YOU":""}</div></div><strong class="coins">◈ ${fmt(p.coins)}</strong></div>`).join("");
+  }
+
+  async function loadEvents() {
+    const rows=await run(db.from("pc_events").select("*").order("starts_at").limit(100));
+    $("eventList").innerHTML=rows.map(ev=>`<div class="item"><div class="itemtop"><b>${esc(ev.title)}</b><span class="pill">${new Date(ev.starts_at).toLocaleString()}</span></div><p class="muted">${esc(ev.description)}</p>${isOwner()?`<button class="danger" data-event-delete="${ev.id}">Delete event</button>`:""}</div>`).join("")||'<p class="muted">No events scheduled.</p>';
+    document.querySelectorAll("[data-event-delete]").forEach(b=>b.onclick=async()=>{
+      try {await run(db.from("pc_events").delete().eq("id",b.dataset.eventDelete));await loadEvents();}
+      catch(e){notify(e.message,true);}
+    });
+  }
+
+  async function loadHomeEvents() {
+    const rows=await run(db.from("pc_events").select("id,title,starts_at").gte("starts_at",new Date().toISOString()).order("starts_at").limit(3));
+    $("homeEvents").innerHTML=rows.map(e=>`<div class="item"><b>${esc(e.title)}</b><div class="muted tiny">${new Date(e.starts_at).toLocaleString()}</div></div>`).join("")||'<p class="muted">No upcoming events.</p>';
+  }
+
+  $("saveProfile").onclick=async()=>{
+    try {
+      const display_name=$("profileDisplay").value.trim();
+      if(!display_name||display_name.length>40)throw Error("Display name must be 1–40 characters.");
+      await run(db.from("pc_profiles").update({display_name}).eq("id",user.id));
+      await loadProfile();showApp();notify("Profile saved.");
+    } catch(e){notify(e.message,true);}
+  };
+
+  $("grantCoins").onclick=async()=>{
+    try {
+      await run(db.rpc("pc_admin_grant_coins",{
+        p_username:$("grantUsername").value.trim(),
+        p_amount:Number($("grantAmount").value)
+      }));
+      notify("Coins granted.");await refreshHome();await loadLeaderboard();
+    } catch(e){notify(e.message,true);}
+  };
+
+  $("eventForm").onsubmit=async e=>{
+    e.preventDefault();
+    try {
+      if(!isOwner())throw Error("Owner only.");
+      await run(db.from("pc_events").insert({
+        title:$("eventTitle").value.trim(),
+        description:$("eventDescription").value.trim(),
+        starts_at:new Date($("eventDate").value).toISOString(),
+        created_by:user.id
+      }));
+      e.target.reset();notify("Event published.");await loadEvents();await loadHomeEvents();
+    } catch(err){notify(err.message,true);}
+  };
+
+  $("itemForm").onsubmit=async e=>{
+    e.preventDefault();
+    try {
+      if(!isOwner())throw Error("Owner only.");
+      const price=Number($("itemPrice").value);
+      if(!Number.isSafeInteger(price)||price<0)throw Error("Price must be a non-negative whole number.");
+      await run(db.from("pc_shop_items").insert({
+        name:$("itemName").value.trim(),
+        description:$("itemDescription").value.trim(),
+        price
+      }));
+      e.target.reset();notify("Shop item added.");await loadShop();await refreshHome();
+    } catch(err){notify(err.message,true);}
+  };
+
+  // MINES
+  async function loadMinesState() {
+    const s=await run(db.rpc("pc_mines_state"));
+    if(s.active) {
+      mines=s;$("minesStart").disabled=true;$("minesCashout").disabled=false;
+      $("minesStatus").textContent="Game active · "+Number(s.multiplier).toFixed(2)+"×";
+      $("minesPayout").textContent="Potential payout: "+fmt(s.payout);
+      drawTiles(s.revealed||[]);
+    } else {
+      mines=null;$("minesStart").disabled=false;$("minesCashout").disabled=true;
+      $("minesStatus").textContent="Start a game to play.";
+      $("minesPayout").textContent="";drawTiles([]);
+    }
+  }
+
+  function drawTiles(revealed=[]) {
+    const box=$("minesTiles");box.innerHTML="";
+    for(let i=0;i<25;i++) {
+      const b=document.createElement("button");
+      b.className="tile";b.textContent=revealed.includes(i)?"✓":"?";
+      b.disabled=!mines||revealed.includes(i);
+      b.onclick=()=>revealTile(i);
+      box.appendChild(b);
+    }
+  }
+
+  async function revealTile(position) {
+    try {
+      const r=await run(db.rpc("pc_mines_reveal",{p_game_id:mines.id,p_position:position}));
+      if(r.mine) {
+        (r.mines||[]).forEach(i=>{const b=$("minesTiles").children[i];b.textContent="✹";b.classList.add("mine");});
+        $("minesStatus").textContent="Boom! Bet lost.";
+        mines=null;$("minesStart").disabled=false;$("minesCashout").disabled=true;
+        notify("Mine hit. Better luck next time.");await refreshHome();
+      } else {
+        mines.revealed=r.revealed;mines.multiplier=r.multiplier;mines.payout=r.payout;
+        drawTiles(r.revealed);
+        $("minesTiles").children[position].classList.add("safe");
+        $("minesTiles").children[position].textContent="✓";
+        $("minesStatus").textContent="Safe · "+Number(r.multiplier).toFixed(2)+"×";
+        $("minesPayout").textContent="Potential payout: "+fmt(r.payout);
+      }
+    } catch(e){notify(e.message,true);}
+  }
+
+  $("minesStart").onclick=async()=>{
+    try {
+      const bet=Number($("minesBet").value),count=Number($("minesCount").value);
+      if(!Number.isSafeInteger(bet)||bet<1)throw Error("Enter a positive whole-number bet.");
+      if(!Number.isInteger(count)||count<1||count>24)throw Error("Choose 1–24 mines.");
+      const r=await run(db.rpc("pc_mines_start",{p_bet:bet,p_mines:count}));
+      mines={id:r.id,bet};$("minesStart").disabled=true;$("minesCashout").disabled=true;
+      $("minesStatus").textContent="Game active · pick a tile";drawTiles([]);
+      await refreshHome();
+    } catch(e){notify(e.message,true);}
+  };
+
+  $("minesCashout").onclick=async()=>{
+    try {
+      if(!mines)throw Error("No active game.");
+      const r=await run(db.rpc("pc_mines_cashout",{p_game_id:mines.id}));
+      mines=null;$("minesStart").disabled=false;$("minesCashout").disabled=true;
+      $("minesStatus").textContent="Cashed out: "+fmt(r.payout)+" coins";
+      $("minesPayout").textContent="";drawTiles([]);
+      await refreshHome();notify("Cashed out "+fmt(r.payout)+" coins.");
+    } catch(e){notify(e.message,true);}
+  };
+
+  // Keep chat reasonably fresh without requiring realtime configuration.
+  db.auth.onAuthStateChange(()=>setTimeout(syncSession,0));
+  syncSession();
+  setInterval(async()=>{
+    if(!user)return;
+    try {
+      await refreshHome();
+      if($("view-chat").classList.contains("active"))await loadChat();
+      if($("view-groups").classList.contains("active")&&activeGroup)await openGroup(activeGroup);
+    } catch(e){console.warn(e);}
+  },20000);
+})();
+</script>
 </body>
 </html>
